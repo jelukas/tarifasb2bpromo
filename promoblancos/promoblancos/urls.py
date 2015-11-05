@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from leads.views import inicio, gracias
+from leads.views import inicio, gracias, solicitar
 
 
 urlpatterns = [
-    url(r'^/$', inicio, name="inicio"),
-    url(r'^/gracias/$', gracias, name="gracias"),
+    url(r'^$', inicio, name="inicio"),
+    url(r'^solicitar/$', solicitar, name="solicitar"),
+    url(r'^gracias/$', gracias, name="gracias"),
     url(r'^admin/', include(admin.site.urls)),
 ]

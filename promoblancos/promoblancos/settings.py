@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cleanup',
     'leads',
 )
 
@@ -105,3 +106,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = PROJECT_PATH.child('static')
+
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = PROJECT_PATH.child('uploads')
