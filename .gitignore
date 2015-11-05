@@ -12,6 +12,7 @@ build/
 develop-eggs/
 dist/
 downloads/
+uploads/
 eggs/
 .eggs/
 lib/
@@ -49,6 +50,7 @@ coverage.xml
 
 # Django stuff:
 *.log
+*.sqlite3
 
 # Sphinx documentation
 docs/_build/
