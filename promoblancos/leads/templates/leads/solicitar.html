@@ -8,8 +8,8 @@
 		<img src="http://mco-s2-p.mlstatic.com/ositos-peluches-perros-juguetes-20761-MCO20196911026_112014-Y.jpg" alt="" class="img-responsive" style="width: 100%;">
 	</div>
 	<div class="col-md-6">
-		<form action="" method="POST">
-			{{ lead_form.as_p }}
+		<form action="" method="POST">{% csrf_token %}
+			{{ form.as_p }}
 			<button type="submit" class="btn btn-primary btn-lg">Enviar datos</button>
 		</form>
 	</div>
