@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_cleanup',
+    'django_cron',
     'leads',
 )
 
@@ -113,3 +114,10 @@ STATIC_ROOT = PROJECT_PATH.child('static')
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = PROJECT_PATH.child('uploads')
+
+# Crons
+
+CRON_CLASSES = [
+    "leads.cron.CsvToFTP",
+    "leads.cron.CsvCreation",
+]
