@@ -9,7 +9,7 @@ from .models import Lead
 
 
 class CsvToFTP(CronJobBase):
-    RUN_EVERY_MINS = 2  # every 5 minutoes
+    RUN_EVERY_MINS = 200
 
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
     code = 'leads.csv_to_ftp'    # a unique code
@@ -21,7 +21,7 @@ class CsvToFTP(CronJobBase):
 
 
 class CsvCreation(CronJobBase):
-    RUN_EVERY_MINS = 5  # every 5 minutoes
+    RUN_EVERY_MINS = 500
 
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
     code = 'leads.csv_creation'    # a unique code

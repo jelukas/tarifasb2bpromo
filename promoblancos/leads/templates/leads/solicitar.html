@@ -10,9 +10,33 @@
 	<div class="col-md-6">
 		<form action="" method="POST">{% csrf_token %}
 			{{ form.as_p }}
-			<button type="submit" class="btn btn-primary btn-lg">Enviar datos</button>
+			<input type="checkbox" id="acepto-bases"> Acepto las bases de la promocion
+			<input type="checkbox" id="acepto-privacidad"> Acepto la Politica de Privacidad
+			<button type="submit" id="enviar-btn" class="btn btn-primary btn-lg" disabled="disabled">Enviar datos</button>
 		</form>
 	</div>
 </div>
 
 {% endblock content %}
+
+
+{% block extra_js %}
+	<script>
+		$(function(){
+			$("#acepto-bases").on('click', function(){
+				if( $(this).is(':checked') && $('#acepto-privacidad').is(':checked')){
+					$("#enviar-btn").prop('disabled', true);
+				}else{
+
+				}
+			});
+			$("#acepto-privacidad").on('click', function(){
+				if( $(this).is(':checked') && $('#acepto-bases').is(':checked')){
+					$("#enviar-btn").prop('disabled', false);
+				}else{
+					$("#enviar-btn").prop('disabled', true);
+				}
+			});
+		});
+	</script>
+{% endblock extra_js %}
