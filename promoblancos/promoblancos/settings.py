@@ -108,12 +108,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = PROJECT_PATH.child('static')
+STATIC_ROOT = PROJECT_PATH.ancestor(1).child('statics')
 
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = PROJECT_PATH.child('uploads')
+MEDIA_ROOT = PROJECT_PATH.ancestor(1).child('uploads')
 
 # Crons
 
