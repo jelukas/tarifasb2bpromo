@@ -9,7 +9,7 @@ from .models import Lead
 
 
 class CsvCreation(CronJobBase):
-    RUN_AT_TIMES = ['15:05', '14:00', ]
+    RUN_AT_TIMES = ['15:15', '15:30']
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
     code = 'leads.csv_creation'    # a unique code
