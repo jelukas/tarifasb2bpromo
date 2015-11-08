@@ -26,9 +26,45 @@
       {% block content %}
       {% endblock content %}
       <div class="row">
-        <div class="col-sm-12">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium at dolor totam impedit placeat vitae, dolorem id optio ipsam deserunt nisi quibusdam temporibus quod praesentium minus veritatis, enim hic ipsa.</div>
+        <div class="col-sm-12">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium at dolor totam impedit placeat vitae, dolorem id optio ipsam deserunt nisi quibusdam temporibus quod praesentium minus veritatis, enim hic ipsa. <a href="#" data-toggle="modal" data-target="#politicaModal">Politica de Privacidad</a> | <a href="#" data-toggle="modal" data-target="#basesModal">Bases de la Promocion</a></div>
       </div>
     </div>
+
+    <!-- politicaModal -->
+    <div class="modal fade" id="politicaModal" tabindex="-1" role="dialog" aria-labelledby="politicaModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Politica de Privacidad</h4>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- basesModal -->
+    <div class="modal fade" id="basesModal" tabindex="-1" role="dialog" aria-labelledby="basesModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Bases de la Promocion</h4>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->

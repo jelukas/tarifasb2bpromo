@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_cleanup',
     'django_cron',
+    'crispy_forms',
     'leads',
 )
 

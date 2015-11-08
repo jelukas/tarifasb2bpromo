@@ -1,17 +1,14 @@
 from django.shortcuts import render
-from .forms import LeadForm
-from django.views.generic.edit import FormView
+from django.views.generic.edit import CreateView
+from .models import Lead
 
 
-class SolicitarView(FormView):
+class SolicitarView(CreateView):
+    model = Lead
+    fields = ['nombre', 'primer_apellido', 'segundo_apellido', 'email', 'codigo_postal', 'colectivo', 'acreditacion', ]
+
     template_name = 'leads/solicitar.html'
-    form_class = LeadForm
     success_url = '/gracias/'
-
-    def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        return super(SolicitarView, self).form_valid(form)
 
 
 def inicio(request):

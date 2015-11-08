@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
 
 
 {% block content %}
@@ -10,11 +11,11 @@
 	<div class="col-sm-6">
 		<h1>Juguetes Blancos</h1>
 		<h2>Esta navidad nadie sin juguetes</h2>
-		<form action="" method="POST">{% csrf_token %}
-			{{ form.as_p }}
-			<input type="checkbox" id="acepto-bases"> Acepto las <a href="#">bases de la promocion</a>
-			<input type="checkbox" id="acepto-privacidad"> Acepto la <a href="#">Politica de Privacidad</a>
-			<button type="submit" id="enviar-btn" class="btn btn-primary btn-lg" disabled="disabled">Enviar datos</button>
+		<form action="" method="POST"  enctype="multipart/form-data">{% csrf_token %}
+			{{ form|crispy }}
+			<input type="checkbox" id="acepto-bases"> Acepto las <a href="#" data-toggle="modal" data-target="#basesModal">bases de la promocion</a>
+			<input type="checkbox" id="acepto-privacidad"> Acepto la <a href="#" data-toggle="modal" data-target="#politicaModal">Politica de Privacidad</a>
+			<button type="submit" id="enviar-btn" class="btn btn-success btn-lg" disabled="disabled">Enviar datos</button>
 		</form>
 	</div>
 </div>
