@@ -4,14 +4,16 @@
 
 {% block content %}
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-sm-6">
 		<img src="http://mco-s2-p.mlstatic.com/ositos-peluches-perros-juguetes-20761-MCO20196911026_112014-Y.jpg" alt="" class="img-responsive" style="width: 100%;">
 	</div>
-	<div class="col-md-6">
+	<div class="col-sm-6">
+		<h1>Juguetes Blancos</h1>
+		<h2>Esta navidad nadie sin juguetes</h2>
 		<form action="" method="POST">{% csrf_token %}
 			{{ form.as_p }}
-			<input type="checkbox" id="acepto-bases"> Acepto las bases de la promocion
-			<input type="checkbox" id="acepto-privacidad"> Acepto la Politica de Privacidad
+			<input type="checkbox" id="acepto-bases"> Acepto las <a href="#">bases de la promocion</a>
+			<input type="checkbox" id="acepto-privacidad"> Acepto la <a href="#">Politica de Privacidad</a>
 			<button type="submit" id="enviar-btn" class="btn btn-primary btn-lg" disabled="disabled">Enviar datos</button>
 		</form>
 	</div>
@@ -25,9 +27,9 @@
 		$(function(){
 			$("#acepto-bases").on('click', function(){
 				if( $(this).is(':checked') && $('#acepto-privacidad').is(':checked')){
-					$("#enviar-btn").prop('disabled', true);
+					$("#enviar-btn").prop('disabled', false);
 				}else{
-
+					$("#enviar-btn").prop('disabled', true);
 				}
 			});
 			$("#acepto-privacidad").on('click', function(){
@@ -35,6 +37,14 @@
 					$("#enviar-btn").prop('disabled', false);
 				}else{
 					$("#enviar-btn").prop('disabled', true);
+				}
+			});
+			$("#enviar-btn").on('click', function(){
+				if( !$('#acepto-privacidad').is(':checked') || !$('#acepto-bases').is(':checked')){
+					alert("Debes aceptar las bases y la Politica de Privacidad");
+					return false;
+				}else{
+					return true;
 				}
 			});
 		});

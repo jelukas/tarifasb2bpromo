@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -24,11 +25,16 @@
     <div class="container">
       {% block content %}
       {% endblock content %}
+      <div class="row">
+        <div class="col-sm-12">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium at dolor totam impedit placeat vitae, dolorem id optio ipsam deserunt nisi quibusdam temporibus quod praesentium minus veritatis, enim hic ipsa.</div>
+      </div>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <!-- Iframe Resizer -->
+    <script src="{% static 'js/iframeResizer.contentWindow.min.js' %}" ></script>
     {% block extra_js %}
     {% endblock extra_js %}
   </body>
