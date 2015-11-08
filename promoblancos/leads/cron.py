@@ -8,22 +8,10 @@ from django.conf import settings
 from .models import Lead
 
 
-class CsvToFTP(CronJobBase):
-    RUN_EVERY_MINS = 2
-
-    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
-    code = 'leads.csv_to_ftp'    # a unique code
-
-    def do(self):
-        f = open(settings.PROJECT_PATH.ancestor(2).child(str(datetime.now().strftime("%d%m%Y%H%M"))+".csv"), 'w+')
-        f.write("hello world in the new file\n")
-        f.close()
-
-
 class CsvCreation(CronJobBase):
-    RUN_EVERY_MINS = 5
+    RUN_AT_TIMES = ['15:05', '14:00', ]
 
-    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    schedule = Schedule(run_at_times=RUN_AT_TIMES)
     code = 'leads.csv_creation'    # a unique code
 
     def do(self):

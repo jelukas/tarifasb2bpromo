@@ -123,6 +123,5 @@ MEDIA_ROOT = PROJECT_PATH.ancestor(1).child('uploads')
 # Crons
 
 CRON_CLASSES = [
-    "leads.cron.CsvToFTP",
     "leads.cron.CsvCreation",
 ]
