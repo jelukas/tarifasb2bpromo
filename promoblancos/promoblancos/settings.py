@@ -118,7 +118,7 @@ STATIC_ROOT = PROJECT_PATH.ancestor(1).child('statics').absolute()
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = PROJECT_PATH.ancestor(1).child('uploads').absolute()
+MEDIA_ROOT = PROJECT_PATH.ancestor(2).child('uploads').absolute()
 
 CSV_ROOT = PROJECT_PATH.ancestor(1).child('csvs').absolute()
 
