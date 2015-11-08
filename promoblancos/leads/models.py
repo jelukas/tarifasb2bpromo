@@ -18,7 +18,7 @@ class Lead(models.Model):
     email = models.EmailField(max_length=200, unique=True)
     codigo_postal = models.CharField(max_length=200)
     colectivo = models.ForeignKey(Colectivo, related_name='leads', default="Desempleo")
-    acreditacion = models.FileField()
+    acreditacion = models.FileField(upload_to="acr")
     enviado_en_csv = models.BooleanField(default=False)
     enviado_cupon = models.BooleanField(default=False)
     colectivo_validado = models.BooleanField(default=False)
