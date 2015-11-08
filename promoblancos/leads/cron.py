@@ -16,7 +16,7 @@ class CsvCreation(CronJobBase):
 
     def do(self):
         leads_validos_no_enviados_en_csv = Lead.objects.filter(enviado_en_csv=False, enviado_cupon=False, colectivo_validado=True)
-        with open(settings.PROJECT_PATH.ancestor(2).child(str(datetime.now().strftime('%d%m%Y%H%M'))+"_test.csv"), 'w+b') as csvfile:
+        with open(settings.CSV_ROOT.child(str(datetime.now().strftime('%d%m%Y%H%M'))+"_test.csv"), 'w+b') as csvfile:
             csv_validos = csv.writer(csvfile, quoting=csv.QUOTE_MINIMAL)
             for lead in leads_validos_no_enviados_en_csv:
                 csv_validos.writerow([lead.id, lead.nombre, lead.primer_apellido, lead.segundo_apellido])

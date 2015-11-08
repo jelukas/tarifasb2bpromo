@@ -120,6 +120,8 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = PROJECT_PATH.ancestor(1).child('uploads')
 
+CSV_ROOT = PROJECT_PATH.ancestor(1).child('csvs')
+
 # Crons
 
 CRON_CLASSES = [
