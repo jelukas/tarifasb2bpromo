@@ -113,14 +113,14 @@ STATICFILES_DIRS = (
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = PROJECT_PATH.ancestor(1).child('statics')
+STATIC_ROOT = PROJECT_PATH.ancestor(1).child('statics').absolute()
 
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = PROJECT_PATH.ancestor(1).child('uploads')
+MEDIA_ROOT = PROJECT_PATH.ancestor(1).child('uploads').absolute()
 
-CSV_ROOT = PROJECT_PATH.ancestor(1).child('csvs')
+CSV_ROOT = PROJECT_PATH.ancestor(1).child('csvs').absolute()
 
 # Crons
 
