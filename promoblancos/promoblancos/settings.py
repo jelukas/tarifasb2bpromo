@@ -42,6 +42,8 @@ INSTALLED_APPS = (
     'django_cleanup',
     'django_cron',
     'crispy_forms',
+    'daterange_filter',
+    'import_export',
     'leads',
 )
 
@@ -95,7 +97,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'es-es'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Madrid'
 
 USE_I18N = True
 

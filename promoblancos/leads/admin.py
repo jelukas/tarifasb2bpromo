@@ -1,4 +1,9 @@
 from django.contrib import admin
+
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
+from daterange_filter.filter import DateRangeFilter
+
 from .models import Lead, Colectivo
 
 
@@ -27,8 +32,17 @@ def enviar_email_con_cupon(modeladmin, request, queryset):
 enviar_email_con_cupon.short_description = "ENVIAR CUPON POR EMAIL"
 
 
-class LeadAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'primer_apellido', 'segundo_apellido', 'email', 'codigo_postal', 'enviado_en_csv', 'enviado_cupon', 'colectivo', 'colectivo_validado', 'acreditacion']
+class LeadResource(resources.ModelResource):
+
+    class Meta:
+        model = Lead
+        list_display = ['nombre', 'primer_apellido', 'segundo_apellido', 'email', 'codigo_postal', 'enviado_en_csv', 'enviado_cupon', 'colectivo', 'colectivo_validado', ]
+
+
+class LeadAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    search_fields = ['nombre', 'primer_apellido', 'segundo_apellido', 'email', ]
+    list_filter = ['colectivo', 'colectivo_validado', 'enviado_en_csv', 'enviado_cupon', ('created', DateRangeFilter), ('updated', DateRangeFilter), ]
+    list_display = ['created', 'updated', 'nombre', 'primer_apellido', 'segundo_apellido', 'email', 'codigo_postal', 'enviado_en_csv', 'enviado_cupon', 'colectivo', 'colectivo_validado', 'acreditacion', ]
     actions = [
         marcar_enviado_en_csv,
         marcar_cupon_enviado,
@@ -36,6 +50,7 @@ class LeadAdmin(admin.ModelAdmin):
         marcar_colectivo_no_validado,
         enviar_email_con_cupon,
     ]
+    resource_class = LeadResource
 
 
 class ColectivoAdmin(admin.ModelAdmin):
