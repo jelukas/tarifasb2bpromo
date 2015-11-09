@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from unipath import Path
+from .utils import get_env_variable
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -131,4 +132,9 @@ COUPONS_ROOT = PROJECT_PATH.ancestor(1).child('coupons').absolute()
 
 CRON_CLASSES = [
     "leads.cron.CsvCreation",
+    "leads.cron.CheckAndSendCoupon",
 ]
+
+
+EMAIL_BACKEND = "sgbackend.SendGridBackend"
+SENDGRID_API_KEY = get_env_variable('JUGUETES_SENDGRID_API_KEY')

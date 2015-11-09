@@ -1,4 +1,8 @@
+from unipath import Path
+
+from django.core.mail import EmailMultiAlternatives
 from django.contrib import admin
+from django.conf import settings
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
@@ -28,7 +32,17 @@ marcar_colectivo_no_validado.short_description = "Marcar como Colectivo NO Valid
 
 
 def enviar_email_con_cupon(modeladmin, request, queryset):
-    pass
+    mail = EmailMultiAlternatives(
+      subject="Aqui tienes tu cupon",
+      body="Este es el cupon XXXXXXX.",
+      from_email="Jesus via JueguetesBlancos <jesus@jesuslucas.com>",
+      to=["jelukas89@gmail.com"]
+    )
+    mail.attach_alternative("<p>Este es tu cuponcinto <strong>XXXXXX </strong></p>", "text/html")
+    cupon_fichero = Path(settings.COUPONS_ROOT, "1-SSDPO23402.pdf")
+    if cupon_fichero.exists():
+        mail.attach_file(cupon_fichero.absolute())
+    mail.send()
 enviar_email_con_cupon.short_description = "ENVIAR CUPON POR EMAIL"
 
 
@@ -36,13 +50,13 @@ class LeadResource(resources.ModelResource):
 
     class Meta:
         model = Lead
-        list_display = ['nombre', 'primer_apellido', 'segundo_apellido', 'email', 'codigo_postal', 'enviado_en_csv', 'enviado_cupon', 'colectivo', 'colectivo_validado', ]
+        list_display = ['nombre', 'primer_apellido', 'segundo_apellido', 'email', 'codigo_postal', 'enviado_en_csv', 'enviado_cupon', 'colectivo', 'colectivo_validado', 'codigo_cupon']
 
 
 class LeadAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     search_fields = ['nombre', 'primer_apellido', 'segundo_apellido', 'email', ]
     list_filter = ['colectivo', 'colectivo_validado', 'enviado_en_csv', 'enviado_cupon', ('created', DateRangeFilter), ('updated', DateRangeFilter), ]
-    list_display = ['created', 'updated', 'nombre', 'primer_apellido', 'segundo_apellido', 'email', 'codigo_postal', 'enviado_en_csv', 'enviado_cupon', 'colectivo', 'colectivo_validado', 'acreditacion', ]
+    list_display = ['created', 'updated', 'nombre', 'primer_apellido', 'segundo_apellido', 'email', 'codigo_postal', 'enviado_en_csv', 'enviado_cupon', 'colectivo', 'colectivo_validado', 'acreditacion', 'codigo_cupon', ]
     actions = [
         marcar_enviado_en_csv,
         marcar_cupon_enviado,
