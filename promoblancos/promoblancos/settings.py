@@ -126,7 +126,7 @@ MEDIA_ROOT = PROJECT_PATH.ancestor(1).child('uploads').absolute()
 CSV_ROOT = PROJECT_PATH.ancestor(1).child('csvs').absolute()
 
 
-COUPONS_ROOT = PROJECT_PATH.ancestor(1).child('coupons').absolute()
+COUPONS_ROOT = STATIC_ROOT.child('coupons').absolute()
 
 # Crons
 
