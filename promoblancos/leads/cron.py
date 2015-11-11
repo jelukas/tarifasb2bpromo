@@ -3,13 +3,14 @@ import csv
 import fnmatch
 import os
 from unipath import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django_cron import CronJobBase, Schedule
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 
 from .models import Lead
+from .utils import recoger_cupones_de_fecha
 
 
 class CsvCreation(CronJobBase):
@@ -29,12 +30,25 @@ class CsvCreation(CronJobBase):
             leads_validos_no_enviados_en_csv.update(enviado_en_csv=True)
 
 
-class CheckAndSendCoupon(CronJobBase):
-    # RUN_AT_TIMES = ['22:20', '22:40', '22:48']
-    RUN_EVERY_MINS = 10
+class RecogerCuponesDiaAnterior(CronJobBase):
+    RUN_AT_TIMES = ['22:15']
 
-    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
-    # schedule = Schedule(run_at_times=RUN_AT_TIMES)
+    schedule = Schedule(run_at_times=RUN_AT_TIMES)
+    code = 'leads.recoger_cupones_dia_anterior'    # a unique code
+
+    def do(self):
+        hoy = datetime.now()
+        dias = timedelta(days=1)
+        fecha_dia_anterior = hoy - dias
+        recoger_cupones_de_fecha(fecha_dia_anterior)
+
+
+class CheckAndSendCoupon(CronJobBase):
+    RUN_AT_TIMES = ['22:45']
+    # RUN_EVERY_MINS = 10
+
+    # schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    schedule = Schedule(run_at_times=RUN_AT_TIMES)
 
     code = 'leads.check_and_send_coupon'
 

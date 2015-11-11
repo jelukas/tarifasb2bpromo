@@ -133,6 +133,7 @@ COUPONS_ROOT = PROJECT_PATH.ancestor(1).child('coupons').absolute()
 CRON_CLASSES = [
     "leads.cron.CsvCreation",
     "leads.cron.CheckAndSendCoupon",
+    "leads.cron.RecogerCuponesDiaAnterior",
 ]
 
 
