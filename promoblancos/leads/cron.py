@@ -31,7 +31,7 @@ class CsvCreation(CronJobBase):
 
 
 class RecogerCuponesDiaAnterior(CronJobBase):
-    RUN_AT_TIMES = ['22:25']
+    RUN_AT_TIMES = ['22:48']
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
     code = 'leads.recoger_cupones_dia_anterior'    # a unique code
