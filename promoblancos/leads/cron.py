@@ -44,7 +44,7 @@ class RecogerCuponesDiaAnterior(CronJobBase):
 
 
 class CheckAndSendCoupon(CronJobBase):
-    RUN_AT_TIMES = ['22:45']
+    RUN_AT_TIMES = ['23:18']
     # RUN_EVERY_MINS = 10
 
     # schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
@@ -64,9 +64,9 @@ class CheckAndSendCoupon(CronJobBase):
                             subject="Aqui tienes tu cupon",
                             body="Este es el cupon "+codigo+".",
                             from_email="Jesus via JueguetesBlancos <jesus@jesuslucas.com>",
-                            to=['jelukas89@gmail.com']
+                            to=['jesus@growhacking.es']
                         )
-                        # mail.attach_alternative("<p>Este es tu cuponcinto <strong>"+codigo+" </strong></p>", "text/html")
+                        mail.attach_alternative("<p>Este es tu cuponcinto <strong>"+codigo+' </strong></p><p>Descarga tu cupon aqui: <a href="/static/coupons/'+fichero+'">DESCARGAR</a></p>', "text/html")
                         # mail.attach_file(cupon_fichero.absolute())
                         mail.send()
                         lead.enviado_cupon = True

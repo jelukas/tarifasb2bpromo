@@ -136,6 +136,7 @@ CRON_CLASSES = [
     "leads.cron.RecogerCuponesDiaAnterior",
 ]
 
+BASE_URL = "http://juguetesblancos.jesuslucas.com"
 
 EMAIL_BACKEND = "sgbackend.SendGridBackend"
 SENDGRID_API_KEY = get_env_variable('JUGUETES_SENDGRID_API_KEY')
