@@ -66,9 +66,9 @@ class CheckAndSendCoupon(CronJobBase):
                             from_email="Jesus via JueguetesBlancos <jesus@jesuslucas.com>",
                             to=['jelukas89@gmail.com']
                         )
-                        mail.attach_alternative("<p>Este es tu cuponcinto <strong>"+codigo+" </strong></p>", "text/html")
-                        mail.attach_file(cupon_fichero.absolute())
-                        # mail.send()
+                        # mail.attach_alternative("<p>Este es tu cuponcinto <strong>"+codigo+" </strong></p>", "text/html")
+                        # mail.attach_file(cupon_fichero.absolute())
+                        mail.send()
                         lead.enviado_cupon = True
                         lead.codigo_cupon = codigo
                         lead.save()
