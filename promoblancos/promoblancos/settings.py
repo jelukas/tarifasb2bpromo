@@ -138,3 +138,8 @@ CRON_CLASSES = [
 
 EMAIL_BACKEND = "sgbackend.SendGridBackend"
 SENDGRID_API_KEY = get_env_variable('JUGUETES_SENDGRID_API_KEY')
+
+SFTP_PORT = get_env_variable('JUGUETES_SFTP_PORT')
+SFTP_USER = get_env_variable('JUGUETES_SFTP_USER')
+SFTP_PASS = get_env_variable('JUGUETES_SFTP_PASS')
+SFTP_HOST = get_env_variable('JUGUETES_SFTP_HOST')
