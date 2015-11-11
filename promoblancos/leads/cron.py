@@ -54,7 +54,7 @@ class CheckAndSendCoupon(CronJobBase):
                         )
                         mail.attach_alternative("<p>Este es tu cuponcinto <strong>"+codigo+" </strong></p>", "text/html")
                         mail.attach_file(cupon_fichero.absolute())
-                        mail.send()
+                        # mail.send()
                         lead.enviado_cupon = True
                         lead.codigo_cupon = codigo
                         lead.save()
