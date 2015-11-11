@@ -50,7 +50,7 @@ class CheckAndSendCoupon(CronJobBase):
                             subject="Aqui tienes tu cupon",
                             body="Este es el cupon "+codigo+".",
                             from_email="Jesus via JueguetesBlancos <jesus@jesuslucas.com>",
-                            to=["pedro@tarifasblancas.com", 'jelukas89@gmail.com']
+                            to=['jelukas89@gmail.com']
                         )
                         mail.attach_alternative("<p>Este es tu cuponcinto <strong>"+codigo+" </strong></p>", "text/html")
                         mail.attach_file(cupon_fichero.absolute())
