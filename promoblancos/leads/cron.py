@@ -10,11 +10,11 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 
 from .models import Lead
-from .utils import recoger_cupones_de_fecha
+from .utils import recoger_cupones_de_fecha, enviar_csv_ftp
 
 
 class CsvCreation(CronJobBase):
-    RUN_AT_TIMES = ['21:30']
+    RUN_AT_TIMES = ['16:00']
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
     code = 'leads.csv_creation'    # a unique code
@@ -28,10 +28,11 @@ class CsvCreation(CronJobBase):
                 csv_validos.writerow([lead.id, lead.nombre, lead.primer_apellido, lead.segundo_apellido])
             csvfile.close()
             leads_validos_no_enviados_en_csv.update(enviado_en_csv=True)
+            enviar_csv_ftp(Path(csvfile.name))
 
 
 class RecogerCuponesDiaAnterior(CronJobBase):
-    RUN_AT_TIMES = ['22:48']
+    RUN_AT_TIMES = ['00:30']
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
     code = 'leads.recoger_cupones_dia_anterior'    # a unique code
@@ -44,7 +45,7 @@ class RecogerCuponesDiaAnterior(CronJobBase):
 
 
 class CheckAndSendCoupon(CronJobBase):
-    RUN_AT_TIMES = ['23:30']
+    RUN_AT_TIMES = ['02:00']
     # RUN_EVERY_MINS = 10
 
     # schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
