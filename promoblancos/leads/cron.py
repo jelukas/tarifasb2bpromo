@@ -63,11 +63,11 @@ class CheckAndSendCoupon(CronJobBase):
                         codigo = fichero.split("_")[1].split(".")[0]
                         mail = EmailMultiAlternatives(
                             subject="Aqui tienes tu cupon",
-                            body="Este es el cupon "+codigo+".",
+                            body='Descarga tu cupon aqui: '+settings.BASE_URL+'/static/coupons/'+fichero+' </p>',
                             from_email="Jesus via JueguetesBlancos <jesus@jesuslucas.com>",
                             to=['jesus@growhacking.es']
                         )
-                        mail.attach_alternative("<p>Este es tu cuponcinto <strong>"+codigo+' </strong></p><p>Descarga tu cupon aqui: <a href="'+settings.BASE_URL+'/static/coupons/'+fichero+'">DESCARGAR</a></p>', "text/html")
+                        mail.attach_alternative('<p>Descarga tu cupon aqui: <a href="'+settings.BASE_URL+'/static/coupons/'+fichero+'">DESCARGAR</a></p>', "text/html")
                         # mail.attach_file(cupon_fichero.absolute())
                         mail.send()
                         lead.enviado_cupon = True

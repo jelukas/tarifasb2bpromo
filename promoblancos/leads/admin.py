@@ -1,8 +1,12 @@
+import sendgrid
 from unipath import Path
+import fnmatch
+import os
 
 from django.core.mail import EmailMultiAlternatives
 from django.contrib import admin
 from django.conf import settings
+from django.contrib import messages
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
@@ -32,12 +36,44 @@ marcar_colectivo_no_validado.short_description = "Marcar como Colectivo NO Valid
 
 
 def enviar_email_con_cupon(modeladmin, request, queryset):
-    pass
+    leads_incorrectos = 0
+    leads_correctos = 0
+    for lead in queryset:
+        if lead.enviado_en_csv is True and lead.enviado_cupon is False and lead.colectivo_validado is True:
+            for fichero in os.listdir(settings.COUPONS_ROOT):
+                if fnmatch.fnmatch(fichero, str(lead.id)+'_*.pdf'):
+                    cupon_fichero = Path(settings.COUPONS_ROOT, fichero)
+                    if cupon_fichero.exists():
+                        codigo = fichero.split("_")[1].split(".")[0]
+                        mail = EmailMultiAlternatives(
+                            subject="Aqui tienes tu cupon",
+                            body='Descarga tu cupon aqui: '+settings.BASE_URL+'/static/coupons/'+fichero+' </p>',
+                            from_email="Jesus via JueguetesBlancos <jesus@jesuslucas.com>",
+                            to=['jesus@growhacking.es']
+                        )
+                        mail.attach_alternative('<p>Descarga tu cupon aqui: <a href="'+settings.BASE_URL+'/static/coupons/'+fichero+'">DESCARGAR</a></p>', "text/html")
+                        mail.send()
+                        lead.enviado_cupon = True
+                        lead.codigo_cupon = codigo
+                        lead.save()
+                        leads_correctos = leads_correctos+1
+        else:
+            leads_incorrectos = leads_incorrectos+1
+    messages.success(request, str(leads_correctos)+' Email/s enviado Correctamente')
+    messages.error(request, str(leads_incorrectos)+' Leads no cumplian las condiciones.')
 enviar_email_con_cupon.short_description = "ENVIAR CUPON POR EMAIL"
 
 
 def enviar_email_acreditacion_no_valida(modeladmin, request, queryset):
-    pass
+    sg = sendgrid.SendGridClient(settings.SENDGRID_API_KEY)
+    message = sendgrid.Mail()
+    message.set_subject('Acreditacion No valida, envainos una nueva')
+    message.set_html("<p>Hola tu acreditacion <strong>no es valida</strong></p")
+    message.set_from('Jesus via JueguetesBlancos <jesus@jesuslucas.com>')
+    recipients = queryset.values_list("email")
+    message.smtpapi.set_tos([item[0] for item in recipients])
+    status, msg = sg.send(message)
+    messages.success(request, 'Email enviado Correctamente.')
 enviar_email_acreditacion_no_valida.short_description = "ENVIAR EMAIL: Acreditacion No Valida"
 
 
