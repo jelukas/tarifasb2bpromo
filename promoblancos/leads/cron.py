@@ -39,13 +39,13 @@ class RecogerCuponesDiaAnterior(CronJobBase):
 
     def do(self):
         hoy = datetime.now()
-        dias = timedelta(days=1)
+        dias = timedelta(days=0)
         fecha_dia_anterior = hoy - dias
         recoger_cupones_de_fecha(fecha_dia_anterior)
 
 
 class CheckAndSendCoupon(CronJobBase):
-    RUN_AT_TIMES = ['02:00']
+    RUN_AT_TIMES = ['20:05']
     # RUN_EVERY_MINS = 10
 
     # schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
