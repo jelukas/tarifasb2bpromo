@@ -45,7 +45,7 @@ class RecogerCuponesDiaAnterior(CronJobBase):
 
 
 class CheckAndSendCoupon(CronJobBase):
-    RUN_AT_TIMES = ['20:15']
+    RUN_AT_TIMES = ['20:18']
     # RUN_EVERY_MINS = 10
 
     # schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
@@ -57,7 +57,7 @@ class CheckAndSendCoupon(CronJobBase):
         leads_validos_y_enviados_en_csv = Lead.objects.filter(enviado_en_csv=True, enviado_cupon=False, colectivo_validado=True)
         for lead in leads_validos_y_enviados_en_csv:
             for fichero in os.listdir(settings.COUPONS_ROOT):
-                if fnmatch.fnmatch(fichero, str(lead.id)+'-*.pdf'):
+                if fnmatch.fnmatch(fichero, str(lead.id)+'_*.pdf'):
                     cupon_fichero = Path(settings.COUPONS_ROOT, fichero)
                     if cupon_fichero.exists():
                         codigo = fichero.split("-")[1].split(".")[0]
