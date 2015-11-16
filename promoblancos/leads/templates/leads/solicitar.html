@@ -9,7 +9,6 @@
 		<img src="{% static 'img/juguetesblancos.jpg' %}" alt="" class="img-responsive" style="width: 100%;">
 	</div>
 	<div class="col-sm-6">
-		<h1>Esta navidad nadie sin juguetes</h1>
 		<form action="" method="POST"  enctype="multipart/form-data">{% csrf_token %}
 			{{ form|crispy }}
 			<div class="enviar-datos-cks">
