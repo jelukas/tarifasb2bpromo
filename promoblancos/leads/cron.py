@@ -60,7 +60,7 @@ class CheckAndSendCoupon(CronJobBase):
                 if fnmatch.fnmatch(fichero, str(lead.id)+'_*.pdf'):
                     cupon_fichero = Path(settings.COUPONS_ROOT, fichero)
                     if cupon_fichero.exists():
-                        codigo = fichero.split("_")[1].split(".")[0]
+                        codigo = fichero.split("_")[2].split(".")[0]
                         mail = EmailMultiAlternatives(
                             subject="Mi cupón de 10€ de Juguetes Blancos",
                             body='Descarga tu cupon aqui: '+settings.BASE_URL+'/static/coupons/'+fichero+' </p>',
