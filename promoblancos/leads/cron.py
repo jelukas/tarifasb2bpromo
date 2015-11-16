@@ -14,7 +14,7 @@ from .utils import recoger_cupones_de_fecha, enviar_csv_ftp
 
 
 class CsvCreation(CronJobBase):
-    RUN_AT_TIMES = ['16:00']
+    RUN_AT_TIMES = ['19:25']
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
     code = 'leads.csv_creation'    # a unique code
@@ -22,7 +22,7 @@ class CsvCreation(CronJobBase):
     def do(self):
         leads_validos_no_enviados_en_csv = Lead.objects.filter(enviado_en_csv=False, enviado_cupon=False, colectivo_validado=True)
         # with open(settings.CSV_ROOT.child(str(datetime.now().strftime('%d%m%Y%H%M'))+"_test.csv"), 'w+b') as csvfile:
-        with open(settings.CSV_ROOT.child("fichero_test.csv"), 'w+b') as csvfile:
+        with open(settings.CSV_ROOT.child("fichero.csv"), 'w+b') as csvfile:
             csv_validos = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_ALL)
             for lead in leads_validos_no_enviados_en_csv:
                 csv_validos.writerow([lead.id, lead.nombre, lead.primer_apellido, lead.segundo_apellido])
@@ -32,20 +32,20 @@ class CsvCreation(CronJobBase):
 
 
 class RecogerCuponesDiaAnterior(CronJobBase):
-    RUN_AT_TIMES = ['20:10']
+    RUN_AT_TIMES = ['03:00']
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
     code = 'leads.recoger_cupones_dia_anterior'    # a unique code
 
     def do(self):
         hoy = datetime.now()
-        dias = timedelta(days=0)
+        dias = timedelta(days=1)
         fecha_dia_anterior = hoy - dias
         recoger_cupones_de_fecha(fecha_dia_anterior)
 
 
 class CheckAndSendCoupon(CronJobBase):
-    RUN_AT_TIMES = ['20:20']
+    RUN_AT_TIMES = ['06:00']
     # RUN_EVERY_MINS = 10
 
     # schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
@@ -64,8 +64,8 @@ class CheckAndSendCoupon(CronJobBase):
                         mail = EmailMultiAlternatives(
                             subject="Aqui tienes tu cupon",
                             body='Descarga tu cupon aqui: '+settings.BASE_URL+'/static/coupons/'+fichero+' </p>',
-                            from_email="Jesus via JueguetesBlancos <jesus@jesuslucas.com>",
-                            to=['jesus@growhacking.es']
+                            from_email="Rocio via JueguetesBlancos <jesus@jesuslucas.com>",
+                            to=[lead.email]
                         )
                         mail.attach_alternative('<p>Descarga tu cupon aqui: <a href="'+settings.BASE_URL+'/static/coupons/'+fichero+'">DESCARGAR</a></p>', "text/html")
                         # mail.attach_file(cupon_fichero.absolute())
