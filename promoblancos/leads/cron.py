@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import unicodecsv as csv
 import fnmatch
 import os
@@ -62,9 +62,9 @@ class CheckAndSendCoupon(CronJobBase):
                     if cupon_fichero.exists():
                         codigo = fichero.split("_")[1].split(".")[0]
                         mail = EmailMultiAlternatives(
-                            subject="Aqui tienes tu cupon",
+                            subject="Mi cupón de 10€ de Juguetes Blancos",
                             body='Descarga tu cupon aqui: '+settings.BASE_URL+'/static/coupons/'+fichero+' </p>',
-                            from_email="Rocio via JueguetesBlancos <jesus@jesuslucas.com>",
+                            from_email="Rocio, JueguetesBlancos <rocioleiva@tarifasblancas.com>",
                             to=[lead.email]
                         )
                         mail.attach_alternative('<p>Descarga tu cupon aqui: <a href="'+settings.BASE_URL+'/static/coupons/'+fichero+'">DESCARGAR</a></p>', "text/html")
