@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sendgrid
 from unipath import Path
 import fnmatch
@@ -46,10 +47,10 @@ def enviar_email_con_cupon(modeladmin, request, queryset):
                     if cupon_fichero.exists():
                         codigo = fichero.split("_")[1].split(".")[0]
                         mail = EmailMultiAlternatives(
-                            subject="Aqui tienes tu cupon",
+                            subject="Mi cupón de 10€ de Juguetes Blancos",
                             body='Descarga tu cupon aqui: '+settings.BASE_URL+'/static/coupons/'+fichero+' </p>',
-                            from_email="Jesus via JueguetesBlancos <jesus@jesuslucas.com>",
-                            to=['jesus@growhacking.es']
+                            from_email="Rocio, JueguetesBlancos <rocioleiva@tarifasblancas.com>",
+                            to=[lead.email]
                         )
                         mail.attach_alternative('<p>Descarga tu cupon aqui: <a href="'+settings.BASE_URL+'/static/coupons/'+fichero+'">DESCARGAR</a></p>', "text/html")
                         mail.send()
@@ -67,9 +68,9 @@ enviar_email_con_cupon.short_description = "ENVIAR CUPON POR EMAIL"
 def enviar_email_acreditacion_no_valida(modeladmin, request, queryset):
     sg = sendgrid.SendGridClient(settings.SENDGRID_API_KEY)
     message = sendgrid.Mail()
-    message.set_subject('Acreditacion No valida, envainos una nueva')
+    message.set_subject('Acreditación no válida Juguetes Blancos')
     message.set_html("<p>Hola tu acreditacion <strong>no es valida</strong></p")
-    message.set_from('Jesus via JueguetesBlancos <jesus@jesuslucas.com>')
+    message.set_from('Rocio, JueguetesBlancos <rocioleiva@tarifasblancas.com>')
     recipients = queryset.values_list("email")
     message.smtpapi.set_tos([item[0] for item in recipients])
     status, msg = sg.send(message)
