@@ -1,5 +1,5 @@
 
-import csv
+import unicodecsv as csv
 import fnmatch
 import os
 from unipath import Path
@@ -14,7 +14,7 @@ from .utils import recoger_cupones_de_fecha, enviar_csv_ftp
 
 
 class CsvCreation(CronJobBase):
-    RUN_AT_TIMES = ['19:25']
+    RUN_AT_TIMES = ['20:55']
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
     code = 'leads.csv_creation'    # a unique code
