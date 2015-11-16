@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 
-
+{% load static %}
 
 {% block content %}
 <div class="row">
 	<div class="col-sm-6">
-		<img src="http://mco-s2-p.mlstatic.com/ositos-peluches-perros-juguetes-20761-MCO20196911026_112014-Y.jpg" alt="" class="img-responsive" style="width: 100%;">
+		<img src="{% static 'img/juguetesblancos.jpg' %}" alt="" class="img-responsive" style="width: 100%;">
 	</div>
 	<div class="col-sm-6">
-		<h1>Juguetes Blancos</h1>
-		<h2>Esta navidad nadie sin juguetes</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem itaque voluptatum sapiente ipsa tempora libero id quibusdam animi reiciendis, culpa voluptates dignissimos natus deleniti sint! Ullam neque quos, quisquam sit!</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem itaque voluptatum sapiente ipsa tempora libero id quibusdam animi reiciendis, culpa voluptates dignissimos natus deleniti sint! Ullam neque quos, quisquam sit!</p>
+		<h1>Esta navidad nadie sin juguetes</h1>
+		<p>Esta Navidad <strong>Hipercor€</strong> colabora con <strong>Tarifas Blancas€</strong>, una empresa social que trabaja a favor de colectivos en dicultades, entre ellos, <strong>personas desempleadas o con discapacidad€</strong>.</p>
+		<p>Juntos lanzan la campaña <strong>"JUGUETES BLANCOS"€</strong>, poniendo a disposición de familias en esta situación <strong>20.000 vales de 10€</strong> para la compra de juguetes.</p>
 		<a href="{% url 'solicitar' %}" class="btn btn-lg btn-success">QUIERO EL DESCUENTO</a>
 	</div>
 
