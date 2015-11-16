@@ -5,19 +5,19 @@
 
 {% block content %}
 <div class="row">
-	<div class="col-sm-6">
-		<img src="{% static 'img/juguetesblancos.jpg' %}" alt="" class="img-responsive" style="width: 100%;">
-	</div>
-	<div class="col-sm-6">
+	<div class="col-sm-6 col-sm-push-6">
 		<form action="" method="POST"  enctype="multipart/form-data">{% csrf_token %}
 			{{ form|crispy }}
 			<div class="enviar-datos-cks">
 				<p><em>Debes aceptar las condiciones y privacidad para participar.</em></p>
 				<input type="checkbox" id="acepto-bases"> Acepto las <a href="#" data-toggle="modal" data-target="#basesModal">bases de la promocion</a>
 				<input type="checkbox" id="acepto-privacidad"> Acepto la <a href="#" data-toggle="modal" data-target="#politicaModal">Politica de Privacidad</a>
-				<button type="submit" id="enviar-btn" class="btn btn-success btn-lg" disabled="disabled">Enviar datos</button>
+				<p><button type="submit" id="enviar-btn" class="btn btn-success btn-lg" disabled="disabled">Enviar datos</button></p>
 			</div>
 		</form>
+	</div>
+	<div class="col-sm-6 col-sm-pull-6">
+		<img src="{% static 'img/juguetesblancos.jpg' %}" alt="" class="img-responsive" style="width: 100%;">
 	</div>
 </div>
 
