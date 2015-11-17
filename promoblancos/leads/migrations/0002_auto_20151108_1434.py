@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='lead',
             name='colectivo',
-            field=models.ForeignKey(related_name='leads', default=b'Desempleo', to='leads.Colectivo'),
+            field=models.ForeignKey(related_name='leads', to='leads.Colectivo'),
         ),
         migrations.AlterField(
             model_name='lead',

@@ -88,8 +88,10 @@ WSGI_APPLICATION = 'promoblancos.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': get_env_variable('JUGUETESBLANCOS_DB_NAME'),
+        'USER': get_env_variable('JUGUETESBLANCOS_DB_USER'),
+        'PASSWORD': get_env_variable('JUGUETESBLANCOS_DB_PASS'),
     }
 }
 
