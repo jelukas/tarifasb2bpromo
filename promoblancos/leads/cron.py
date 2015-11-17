@@ -32,20 +32,20 @@ class CsvCreation(CronJobBase):
 
 
 class RecogerCuponesDiaAnterior(CronJobBase):
-    RUN_AT_TIMES = ['11:00']
+    RUN_AT_TIMES = ['17:05']
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
     code = 'leads.recoger_cupones_dia_anterior'    # a unique code
 
     def do(self):
         hoy = datetime.now()
-        dias = timedelta(days=1)
+        dias = timedelta(days=0)
         fecha_dia_anterior = hoy - dias
         recoger_cupones_de_fecha(fecha_dia_anterior)
 
 
 class CheckAndSendCoupon(CronJobBase):
-    RUN_AT_TIMES = ['16:00']
+    RUN_AT_TIMES = ['17:30']
     # RUN_EVERY_MINS = 10
 
     # schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
@@ -60,7 +60,7 @@ class CheckAndSendCoupon(CronJobBase):
                 if fnmatch.fnmatch(fichero, str(lead.id)+'_*.pdf'):
                     cupon_fichero = Path(settings.COUPONS_ROOT, fichero)
                     if cupon_fichero.exists():
-                        codigo = fichero.split("_")[2].split(".")[0]
+                        codigo = fichero.split("_")[1].split(".")[0]
                         mail = EmailMultiAlternatives(
                             subject="Mi cupón de 10€ de Juguetes Blancos",
                             body='Descarga tu cupon aqui: '+settings.BASE_URL+'/static/coupons/'+fichero+' </p>',
