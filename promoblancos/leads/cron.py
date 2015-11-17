@@ -8,13 +8,15 @@ from datetime import datetime, timedelta
 from django_cron import CronJobBase, Schedule
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 
 from .models import Lead
 from .utils import recoger_cupones_de_fecha, enviar_csv_ftp
 
 
 class CsvCreation(CronJobBase):
-    RUN_AT_TIMES = ['20:55']
+    RUN_AT_TIMES = ['23:45']
+    MIN_NUM_FAILURES = 1
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
     code = 'leads.csv_creation'    # a unique code
@@ -32,7 +34,8 @@ class CsvCreation(CronJobBase):
 
 
 class RecogerCuponesDiaAnterior(CronJobBase):
-    RUN_AT_TIMES = ['17:05']
+    RUN_AT_TIMES = ['09:00']
+    MIN_NUM_FAILURES = 1
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
     code = 'leads.recoger_cupones_dia_anterior'    # a unique code
@@ -45,7 +48,8 @@ class RecogerCuponesDiaAnterior(CronJobBase):
 
 
 class CheckAndSendCoupon(CronJobBase):
-    RUN_AT_TIMES = ['17:30']
+    RUN_AT_TIMES = ['10:30']
+    MIN_NUM_FAILURES = 1
     # RUN_EVERY_MINS = 10
 
     # schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
@@ -61,13 +65,14 @@ class CheckAndSendCoupon(CronJobBase):
                     cupon_fichero = Path(settings.COUPONS_ROOT, fichero)
                     if cupon_fichero.exists():
                         codigo = fichero.split("_")[1].split(".")[0]
+                        url_cupon = settings.BASE_URL+'/static/coupons/'+fichero
                         mail = EmailMultiAlternatives(
                             subject="Mi cupón de 10€ de Juguetes Blancos",
-                            body='Descarga tu cupon aqui: '+settings.BASE_URL+'/static/coupons/'+fichero+' </p>',
+                            body='Descarga tu cupon aqui: '+url_cupon+' </p>',
                             from_email="Rocio, JueguetesBlancos <rocioleiva@tarifasblancas.com>",
                             to=[lead.email]
                         )
-                        mail.attach_alternative('<p>Descarga tu cupon aqui: <a href="'+settings.BASE_URL+'/static/coupons/'+fichero+'">DESCARGAR</a></p>', "text/html")
+                        mail.attach_alternative(render_to_string('leads/email_cupon.html', {'lead': lead, 'url_cupon': url_cupon}), "text/html")
                         # mail.attach_file(cupon_fichero.absolute())
                         mail.send()
                         lead.enviado_cupon = True

@@ -28,8 +28,9 @@ SECRET_KEY = '(b9hv87_y^xi_(7734vj6njhy+r#$tsexev0r!)qv_5n27uv4k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+ADMINS = (('Jesus', 'jesuslucas@openwebinars.net'))
 
 # Application definition
 
@@ -134,9 +135,10 @@ CRON_CLASSES = [
     "leads.cron.CsvCreation",
     "leads.cron.CheckAndSendCoupon",
     "leads.cron.RecogerCuponesDiaAnterior",
+    "django_cron.cron.FailedRunsNotificationCronJob",
 ]
 
-BASE_URL = "http://juguetesblancos.jesuslucas.com"
+BASE_URL = "http://juguetesblancos.com"
 
 EMAIL_BACKEND = "sgbackend.SendGridBackend"
 SENDGRID_API_KEY = get_env_variable('JUGUETES_SENDGRID_API_KEY')
@@ -148,3 +150,5 @@ SFTP_HOST = get_env_variable('JUGUETES_SFTP_HOST')
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+FAILED_RUNS_CRONJOB_EMAIL_PREFIX = "[Error JuguetesBlancos]: "

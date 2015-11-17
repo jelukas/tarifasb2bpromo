@@ -8,6 +8,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.contrib import admin
 from django.conf import settings
 from django.contrib import messages
+from django.template.loader import render_to_string
 
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
@@ -46,13 +47,14 @@ def enviar_email_con_cupon(modeladmin, request, queryset):
                     cupon_fichero = Path(settings.COUPONS_ROOT, fichero)
                     if cupon_fichero.exists():
                         codigo = fichero.split("_")[1].split(".")[0]
+                        url_cupon = settings.BASE_URL+'/static/coupons/'+fichero
                         mail = EmailMultiAlternatives(
                             subject="Mi cupón de 10€ de Juguetes Blancos",
-                            body='Descarga tu cupon aqui: '+settings.BASE_URL+'/static/coupons/'+fichero+' </p>',
+                            body='Descarga tu cupon aqui: '+url_cupon+' </p>',
                             from_email="Rocio, JueguetesBlancos <rocioleiva@tarifasblancas.com>",
                             to=[lead.email]
                         )
-                        mail.attach_alternative('<p>Descarga tu cupon aqui: <a href="'+settings.BASE_URL+'/static/coupons/'+fichero+'">DESCARGAR</a></p>', "text/html")
+                        mail.attach_alternative(render_to_string('leads/email_cupon.html', {'lead': lead, 'url_cupon': url_cupon}), "text/html")
                         mail.send()
                         lead.enviado_cupon = True
                         lead.codigo_cupon = codigo
@@ -69,7 +71,7 @@ def enviar_email_acreditacion_no_valida(modeladmin, request, queryset):
     sg = sendgrid.SendGridClient(settings.SENDGRID_API_KEY)
     message = sendgrid.Mail()
     message.set_subject('Acreditación no válida Juguetes Blancos')
-    message.set_html("<p>Hola tu acreditacion <strong>no es valida</strong></p")
+    message.set_html(render_to_string('leads/email_acreditacion_no_valida.html', {}))
     message.set_from('Rocio, JueguetesBlancos <rocioleiva@tarifasblancas.com>')
     recipients = queryset.values_list("email")
     message.smtpapi.set_tos([item[0] for item in recipients])

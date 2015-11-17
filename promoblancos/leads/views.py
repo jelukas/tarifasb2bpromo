@@ -17,6 +17,10 @@ class SolicitarView(CreateView):
     def dispatch(self, *args, **kwargs):
         return super(SolicitarView, self).dispatch(*args, **kwargs)
 
+    def get_success_url(self):
+        self.object.enviar_email_inicial()
+        return super(CreateView, self).get_success_url()
+
 
 @xframe_options_exempt
 def inicio(request):
