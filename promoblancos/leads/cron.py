@@ -34,7 +34,7 @@ class CsvCreation(CronJobBase):
 
 
 class RecogerCuponesDiaAnterior(CronJobBase):
-    RUN_AT_TIMES = ['09:00']
+    RUN_AT_TIMES = ['22:30']
     MIN_NUM_FAILURES = 1
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
@@ -42,13 +42,13 @@ class RecogerCuponesDiaAnterior(CronJobBase):
 
     def do(self):
         hoy = datetime.now()
-        dias = timedelta(days=0)
+        dias = timedelta(days=1)
         fecha_dia_anterior = hoy - dias
         recoger_cupones_de_fecha(fecha_dia_anterior)
 
 
 class CheckAndSendCoupon(CronJobBase):
-    RUN_AT_TIMES = ['10:30']
+    RUN_AT_TIMES = ['22:50']
     MIN_NUM_FAILURES = 1
     # RUN_EVERY_MINS = 10
 
