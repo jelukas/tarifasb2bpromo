@@ -34,7 +34,7 @@ class CsvCreation(CronJobBase):
 
 
 class RecogerCuponesDiaAnterior(CronJobBase):
-    RUN_AT_TIMES = ['22:30']
+    RUN_AT_TIMES = ['09:00']
     MIN_NUM_FAILURES = 1
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
@@ -48,7 +48,7 @@ class RecogerCuponesDiaAnterior(CronJobBase):
 
 
 class CheckAndSendCoupon(CronJobBase):
-    RUN_AT_TIMES = ['22:50']
+    RUN_AT_TIMES = ['10:00']
     MIN_NUM_FAILURES = 1
     # RUN_EVERY_MINS = 10
 
