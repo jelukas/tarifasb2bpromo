@@ -40,7 +40,7 @@ class Lead(models.Model):
 
     def enviar_email_inicial(self):
         mail = EmailMultiAlternatives(
-            subject="Confirmación acreditación Juguetes Blancos",
+            subject="Confirmación registro Juguetes Blancos",
             body='Hola  Jesús, Gracias por registrarte en Juguetes Blancos. Hemos recibido tu solicitud del cupón de 10€ para la compra de juguetes y bicicletas en Hipercor. Una vez hayamos comprobado que tu documentación es correcta, te enviaremos el cupón  nominativo dentro de un plazo de 5 días. ¡Hasta muy pronto! Rocío Leiva Trabajadora Social y Asesora de Usuari@s Beneficiarios en Tarifas Blancas Habla de Juguetes Blancos a tus amig@s :)',
             from_email="Rocio, JueguetesBlancos <rocioleiva@tarifasblancas.com>",
             to=[self.email]
