@@ -23,7 +23,7 @@ class Lead(models.Model):
     email = models.EmailField(max_length=200, unique=True, error_messages={'unique': "Ya existe un Registro con este Email."})
     codigo_postal = models.CharField(max_length=200)
     colectivo = models.ForeignKey(Colectivo, related_name='leads')
-    acreditacion = models.FileField(upload_to="acr", verbose_name='Certificación de pertenencia al colectivo')
+    acreditacion = models.FileField(upload_to="acr", verbose_name='Certificación de pertenencia al colectivo', blank=True, null=True)
     colectivo_validado = models.BooleanField(default=False)
     enviado_en_csv = models.BooleanField(default=False)
     enviado_cupon = models.BooleanField(default=False)

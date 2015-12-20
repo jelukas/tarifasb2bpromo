@@ -17,12 +17,13 @@ from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from leads.views import inicio, gracias, SolicitarView
+from leads.views import inicio, gracias, SolicitarView, SegundoPasoView
 
 
 urlpatterns = [
     url(r'^$', inicio, name="inicio"),
     url(r'^solicitar/$', SolicitarView.as_view(), name="solicitar"),
+    url(r'^ultimo-paso/(?P<pk>\d+)$', SegundoPasoView.as_view(), name="segundo_paso"),
     url(r'^gracias/$', gracias, name="gracias"),
     url(r'^admin/', include(admin.site.urls)),
 ]

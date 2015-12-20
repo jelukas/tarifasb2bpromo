@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}{% load static %}
+
+
+{% block content %}
+<div class="row">
+	<div class="col-sm-6 col-sm-push-6">
+		<div>
+			<p>Haz clic en seleccionar archivo y añade:</p>
+			<ul>
+				<li>Para Desempleo: Una imagen (foto) o documento de la Demanda de Empleo.</li>
+				<li>Para Discapacidad: Una imagen o foto  de la Tarjeta Acreditativa del Grado de Discapacidad.</li>
+			</ul>
+		</div>
+		<form action="" method="POST"  enctype="multipart/form-data">{% csrf_token %}
+			{{ form|crispy }}
+			<p><button type="submit" id="enviar-btn" class="btn btn-success btn-lg" >Enviar y finalizar</button></p>
+		</form>
+		<div>
+			<p>Para cualquier duda, puedes escribirnos a <a href="mailto:rocioleiva@tarifasblancas.com" target="_blank">rocioleiva@tarifasblancas.com</a><br>Gracias</p>
+		</div>
+	</div>
+	<div class="col-sm-6 col-sm-pull-6">
+		<img src="{% static 'img/juguetesblancos.jpg' %}" alt="" class="img-responsive" style="width: 100%;">
+	</div>
+</div>
+
+{% endblock content %}
