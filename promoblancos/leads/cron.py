@@ -15,7 +15,7 @@ from .utils import recoger_cupones_de_fecha, enviar_csv_ftp
 
 
 class CsvCreation(CronJobBase):
-    RUN_AT_TIMES = ['23:45']
+    RUN_AT_TIMES = ["09:55", "10:55", "11:55", "12:55", "13:55", "14:55", "15:55", "16:55", "17:55", "18:55", "19:55", "20:55"]
     MIN_NUM_FAILURES = 1
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
@@ -34,7 +34,7 @@ class CsvCreation(CronJobBase):
 
 
 class RecogerCuponesDiaAnterior(CronJobBase):
-    RUN_AT_TIMES = ['09:00']
+    RUN_AT_TIMES = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00"]
     MIN_NUM_FAILURES = 1
 
     schedule = Schedule(run_at_times=RUN_AT_TIMES)
@@ -42,13 +42,13 @@ class RecogerCuponesDiaAnterior(CronJobBase):
 
     def do(self):
         hoy = datetime.now()
-        dias = timedelta(days=1)
+        dias = timedelta(days=0)
         fecha_dia_anterior = hoy - dias
         recoger_cupones_de_fecha(fecha_dia_anterior)
 
 
 class CheckAndSendCoupon(CronJobBase):
-    RUN_AT_TIMES = ['10:00']
+    RUN_AT_TIMES = ["10:05", "11:05", "12:05", "13:05", "14:05", "15:05", "16:05", "17:05", "18:05", "19:05", "20:05", "21:05"]
     MIN_NUM_FAILURES = 1
     # RUN_EVERY_MINS = 10
 
